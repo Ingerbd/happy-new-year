@@ -1,11 +1,208 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Happy New Year</title>
+    <title>2026 泰言泰语搭子社群新年抽好彩</title>
+    <style>
+      :root {
+        /* 重新定义的红金配色方案 */
+        --main-red: #d21212; /* 浓郁新年红 */
+        --accent-gold: #ffd700; /* 亮金色 */
+        --deep-gold: #b8860b; /* 暗金色，用于文字 */
+        --paper-white: #fffbf2; /* 暖白色背景 */
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        /* 背景改为更有质感的暖色，并加入淡淡的红色渐变 */
+        background: linear-gradient(180deg, #fffbf2 0%, #ffe5e5 100%);
+        font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        overflow-x: hidden;
+      }
+
+      /* 顶部节庆装饰线 */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 10px;
+        background: repeating-linear-gradient(
+          90deg,
+          var(--main-red),
+          var(--main-red) 30px,
+          var(--accent-gold) 30px,
+          var(--accent-gold) 35px
+        );
+        z-index: 10;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        padding: 20px;
+      }
+
+      /* 标题配色优化 */
+      .header-group {
+        margin-bottom: 25px;
+      }
+      .sub-title {
+        color: var(--deep-gold);
+        font-size: 1.1rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        margin-bottom: 5px;
+      }
+      .main-title {
+        color: var(--main-red);
+        font-size: 2.3rem;
+        font-weight: 900;
+        /* 增加白底红边的立体效果 */
+        text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(184, 134, 11, 0.2);
+        margin: 0;
+      }
+
+      /* 展示容器：改为红金边框礼盒感 */
+      #result-container {
+        width: 100%;
+        min-height: 480px;
+        background: #fff;
+        border-radius: 15px;
+        /* 核心修改：加厚红色边框 + 金色外描边 */
+        border: 6px solid var(--main-red);
+        outline: 2px solid var(--accent-gold);
+        outline-offset: -10px;
+        box-shadow: 0 15px 40px rgba(210, 18, 18, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 25px;
+        box-sizing: border-box;
+      }
+
+      #result-img {
+        width: 100%;
+        display: none;
+        animation: cardReveal 0.5s ease-out;
+      }
+
+      @keyframes cardReveal {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .placeholder-text {
+        color: var(--main-red);
+        padding: 40px;
+        line-height: 1.8;
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      /* 按钮：改为红底金字，更具冲击力 */
+      .draw-btn {
+        background: linear-gradient(135deg, #e60000, #b30000);
+        color: var(--accent-gold);
+        border: 2px solid var(--accent-gold);
+        padding: 16px 55px;
+        font-size: 1.3rem;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(179, 0, 0, 0.4);
+        transition: all 0.2s;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .draw-btn:active {
+        transform: scale(0.95);
+        box-shadow: 0 2px 8px rgba(179, 0, 0, 0.4);
+      }
+
+      /* 底部提示文案配色 */
+      .hint {
+        margin-top: 15px;
+        font-size: 0.9rem;
+        color: #666;
+        line-height: 1.6;
+        display: none;
+        background: rgba(255, 215, 0, 0.15);
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px dashed var(--deep-gold);
+      }
+    </style>
   </head>
   <body>
-    <p>Happy New Year</p>
+    <div class="container">
+      <div class="header-group">
+        <div class="sub-title">🇹🇭 泰言泰语搭子社群</div>
+        <h1 class="main-title">2026新年抽好彩</h1>
+      </div>
+
+      <div id="result-container">
+        <div class="placeholder-text">
+          🧧<br />
+          点击下方按钮<br />
+          抽取你的2026专属泰语新年祝福
+        </div>
+        <img id="result-img" src="" alt="新年祝福图片" />
+      </div>
+
+      <button class="draw-btn" onclick="draw()">即刻抽取</button>
+
+      <p id="save-hint" class="hint">
+        以上祝福由泰言泰语搭子社群的伙伴送出！<br />
+        <strong>长按上方图片保存</strong>，分享到朋友圈吧！
+      </p>
+    </div>
+
+    <script>
+      // 图片配置保持不变
+      const images = [
+        "images/wish1.jpg",
+        "images/wish2.jpg",
+        "images/wish3.jpg",
+        "images/wish4.jpg",
+      ];
+
+      function draw() {
+        const btn = document.querySelector(".draw-btn");
+        const img = document.getElementById("result-img");
+        const placeholder = document.querySelector(".placeholder-text");
+        const hint = document.getElementById("save-hint");
+
+        btn.innerText = "重新抽取";
+
+        const randomIndex = Math.floor(Math.random() * images.length);
+        const selectedSrc = images[randomIndex];
+
+        placeholder.style.display = "none";
+        img.src = selectedSrc;
+        img.style.display = "block";
+        hint.style.display = "block";
+
+        if (navigator.vibrate) {
+          navigator.vibrate(50);
+        }
+      }
+    </script>
   </body>
 </html>
